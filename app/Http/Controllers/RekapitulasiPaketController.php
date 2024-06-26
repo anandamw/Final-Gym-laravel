@@ -6,6 +6,7 @@ use App\Models\Rekapitulasi;
 use Illuminate\Http\Request;
 // use BaconQrCode\Encoder\QrCode;
 use App\Http\Controllers\Controller;
+use App\Models\Customers;
 use RealRashid\SweetAlert\Facades\Alert;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -14,34 +15,55 @@ class RekapitulasiPaketController extends Controller
 {
     public function index()
     {
-        $dataRekap =  Rekapitulasi::all();
+        $dataRekap =  Rekapitulasi::joinTwoTable();
 
         return view('admin.rekapitulasi-pakets.rekapitulasi-paket', compact('dataRekap'));
     }
 
 
-    public function store(Request $request)
+
+
+    public function scannerStore(Request $request)
     {
-        // Validate the incoming request data
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'kategori_paket' => 'required|string|max:255',
-            'nomer_whatsapp' => 'required|string|max:15',
-        ]);
+
+
+        $token = $request->input('customer');
+
+        // Cari customer berdasarkan token
+        $customer = Customers::where('token_customer', $token)->first();
+
+        if ($customer) {
+            // Cek apakah data sudah ada di rekapitulasi_pakets
+            $existingRecord = Rekapitulasi::where('customers_id', $customer->id)
+                ->whereDate('tanggal', now()->toDateString())
+                ->first();
+            toast('Customer Telah direcord', 'warning');
+
+
+            if (!$existingRecord) {
+                // Tambahkan data rekapitulasi paket jika belum ada
+                Rekapitulasi::create([
+                    'customers_id' => $customer->id,
+                    'tanggal' => now(),
+                ]);
+
+                toast('Customer Berhasil direcord', 'success');
+            }
+
+            // Update status customer
+            $customer->status = 'success';
+            $customer->save();
+
+            return redirect()->back()->with('success', 'Customer status updated and package recorded successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Customer not found.');
+        }
+    }
 
 
 
-        // Create a new Data instance and save it to the database
-        $data = new Rekapitulasi();
-        $data->name = $request->input('name');
-        $data->email = $request->input('email');
-        $data->kategori_paket = $request->input('kategori_paket');
-        $data->nomer_whatsapp = $request->input('nomer_whatsapp');
-        $data->save();
-
-        // Redirect or return a response
-        return redirect()->back()->with('success', 'Data has been saved successfully.');
+    public function scann()
+    {
     }
 
 

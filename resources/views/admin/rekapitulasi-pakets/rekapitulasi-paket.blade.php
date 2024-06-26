@@ -40,14 +40,9 @@
                                         <video id="preview" width="400px" style="border-radius: 1rem;"></video>
                                     </div>
 
-                                    {{-- scanner create --}}
-                                    <form id="form">
+                                    <form id="form" action="{{ route('scannerstore') }}" method="POST">
                                         @csrf
-                                        <input type="hidden" name="name" id="name">
-                                        <input type="hidden" name="email" id="email">
-                                        <input type="hidden" name="kategori_paket" id="kategori_paket">
-                                        <input type="hidden" name="nomer_whatsapp" id="nomer_whatsapp">
-                                        <button type="hidden" id="submit-btn">Submit</button>
+                                        <input type="hidden" name="customer" id="customer">
                                     </form>
 
                                     <div class="modal-footer">
@@ -73,8 +68,8 @@
                                                 <th scope="col">No</th>
                                                 {{-- <th scope="col">Code</th> --}}
                                                 <th scope="col">Nama</th>
-                                                <th scope="col">Kategori Paket</th>
-                                                <th scope="col">harga paket</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Nomer Whatsapp</th>
                                                 <th scope="col">Waktu Dibuat</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
@@ -91,15 +86,15 @@
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <span> {{ $get->kategori_paket }} </span>
+                                                        <span> {{ $get->email }} </span>
                                                     </td>
                                                     <td>
-                                                        <span>Rp, {{ $get->harga_paket }} </span>
+                                                        <span>{{ $get->nomer_whatsapp }} </span>
                                                     </td>
                                                     <td>
                                                         <span> {{ $get->created_at }} </span>
                                                     </td>
-                                                    {{-- <td>
+                                                    <td>
                                                         <div class="dropdown action-opt">
                                                             <button class="btn bg p-0" type="button"
                                                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -129,7 +124,7 @@
                                                                 </li>
                                                             </ul>
                                                         </div>
-                                                    </td> --}}
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -146,78 +141,17 @@
 
 
     <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-
-    <script>
-        $name = document.getElementById('name');
-        $email = document.getElementById('email');
-        $kategori_paket = document.getElementById('kategori_paket');
-        $nomer_whatsapp = document.getElementById('nomer_whatsapp');
-
-        $(document).ready(function() {
-            // Function to scan data (mock function for demonstration purposes)
-            function scanData() {
-                // Simulate scanning data
-                return {
-                    name: $name,
-                    email: $email,
-                    kategori_paket: $kategori_paket,
-                    nomer_whatsapp: $nomer_whatsapp
-                };
-            }
-
-            $('#submit-btn').click(function(e) {
-                e.preventDefault();
-
-                // Get scanned data
-                var scannedData = scanData();
-
-                // Set the hidden input fields with scanned data
-                $('#name').val(scannedData.name);
-                $('#email').val(scannedData.email);
-                $('#kategori_paket').val(scannedData.kategori_paket);
-                $('#nomer_whatsapp').val(scannedData.nomer_whatsapp);
-
-                // Collect form data
-                var formData = {
-                    name: $('#name').val(),
-                    email: $('#email').val(),
-                    kategori_paket: $('#kategori_paket').val(),
-                    nomer_whatsapp: $('#nomer_whatsapp').val(),
-                    _token: $('meta[name="csrf-token"]').attr('content')
-                };
-
-                // Send AJAX request
-                $.ajax({
-                    url: "{{ route('store') }}",
-                    type: "POST",
-                    data: formData,
-                    success: function(response) {
-                        $('#success-message').show();
-                        $('#error-message').hide();
-                    },
-                    error: function(response) {
-                        var errors = response.responseJSON.errors;
-                        var errorMessage = '<ul>';
-                        $.each(errors, function(key, value) {
-                            errorMessage += '<li>' + value + '</li>';
-                        });
-                        errorMessage += '</ul>';
-                        $('#error-message').html(errorMessage).show();
-                        $('#success-message').hide();
-                    }
-                });
-            });
-        });
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
         let scanner = new Instascan.Scanner({
             video: document.getElementById('preview')
         });
+
         scanner.addListener('scan', function(content) {
             console.log(content);
+            document.getElementById('customer').value = content;
+            document.getElementById('form').submit();
         });
+
         Instascan.Camera.getCameras().then(function(cameras) {
             if (cameras.length > 0) {
                 scanner.start(cameras[0]);
@@ -227,10 +161,5 @@
         }).catch(function(e) {
             console.error(e);
         });
-
-        scanner.addListener('scan', function(c) {
-            document.getElementById('customer').value = c;
-            document.getElementById('form').submit();
-        })
     </script>
 @endsection

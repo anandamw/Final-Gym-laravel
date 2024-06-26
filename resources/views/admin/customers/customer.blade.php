@@ -50,9 +50,12 @@
                                                        </td>
                                                        <td>
                                                            <span>
-                                                               {!! $get->qrCode !!}
+
+                                                               {!! QrCode::size(150)->generate($get->token_customer) !!}
                                                            </span>
+
                                                        </td>
+
                                                        <td>
                                                            <span>{{ $get->name }}</span>
                                                        </td>
@@ -63,12 +66,45 @@
                                                            <span>{{ $get->email }}</span>
                                                        </td>
                                                        <td>
-                                                           <span>{{ $get->kategori_paket }}</span>
+                                                           <span>{{ $get->pakets_id }}</span>
                                                        </td>
                                                        <td>
                                                            <span>
                                                                @if ($get->status == 'pending')
-                                                                   <div class="btn btn-warning text-white"> Pending</div>
+                                                                   <div class="btn btn-warning text-white"
+                                                                       data-bs-toggle="modal"
+                                                                       data-bs-target="#exampleModal4{{ $get->id }}">
+                                                                       Pending </div>
+
+                                                                   <!-- Modal -->
+                                                                   <div class="modal fade"
+                                                                       id="exampleModal4{{ $get->id }}" tabindex="-1"
+                                                                       aria-labelledby="exampleModalLabel"
+                                                                       aria-hidden="true">
+                                                                       <div class="modal-dialog modal-dialog-centered">
+                                                                           <div class="modal-content">
+                                                                               <div class="modal-header">
+                                                                                   <h1 class="modal-title fs-5"
+                                                                                       id="exampleModalLabel">Modal title
+                                                                                   </h1>
+                                                                                   <button type="button" class="btn-close"
+                                                                                       data-bs-dismiss="modal"
+                                                                                       aria-label="Close"></button>
+                                                                               </div>
+                                                                               <div class="modal-body">
+                                                                                   {{ $get->name }}
+                                                                               </div>
+                                                                               <div class="modal-footer">
+                                                                                   <button type="button"
+                                                                                       class="btn btn-danger text-white"
+                                                                                       data-bs-dismiss="modal">Close</button>
+                                                                                   <button type="button"
+                                                                                       class="btn btn-primary text-white">Save
+                                                                                       changes</button>
+                                                                               </div>
+                                                                           </div>
+                                                                       </div>
+                                                                   </div>
                                                                @elseif ($get->status == 'invalid')
                                                                    <div class="btn btn-danger text-white"> Invalid </div>
                                                                @elseif ($get->status == 'success')
@@ -76,10 +112,10 @@
                                                                @endif
                                                            </span>
                                                        </td>
+
                                                        <td>
                                                            <span> {{ $get->created_at }} </span>
                                                        </td>
-
                                                        <td>
                                                            <div class="dropdown action-opt">
                                                                <button class="btn bg p-0" type="button"

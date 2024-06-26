@@ -15,14 +15,11 @@ return new class extends Migration
     {
         Schema::create('rekapitulasi_pakets', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('customers_id')->constrained();
-            $table->string('name');
-            $table->string('email');
-            $table->string('kategori_paket');
-            $table->string('nomer_whatsapp');
-            // $table->foreignId('pakets_id')->constrained();
-            $table->date('tanggal');
+            $table->foreignId('customers_id')->constrained();
+            $table->date('tanggal')->now();
             $table->timestamps();
+
+            // $table->unique(['customers_id', 'tanggal']);
         });
     }
 

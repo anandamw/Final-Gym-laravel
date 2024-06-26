@@ -25,16 +25,10 @@ class CustomerController extends Controller
     public function index()
     {
 
-        $dataCustomer = Customers::CustomersJoin__()->get();
-        foreach ($dataCustomer as $get) {
+        $dataCustomer = Customers::all(); // Ambil semua data pelanggan
 
-            $get->qrCode = QrCode::size(150)->generate(json_encode([
-                'name' => $get->name,
-                'nomer_whatsapp' => $get->nomer_whatsapp,
-                'email' => $get->email,
-                'kategori_paket' => $get->kategori_paket,
-            ]));
-        }
+
+
 
         return view('admin.customers.customer', compact('dataCustomer'));
     }
@@ -97,16 +91,8 @@ class CustomerController extends Controller
         Link QrCode :  $token
               ";
 
+
         $this->WhatsappControllers->inject($target, $massage);
-
-        // $emailData = [
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'nomer_whatsapp' => $request->nomer_whatsapp,
-        //     'kategori_paket' => $paket->kategori_paket,
-        // ];
-        // Mail::to("anandamaulanaw1850@gmail.com")->send(new CustomerMail());
-
         Alert::success('Success Title', 'Success Message');
 
         return redirect('/customer')->with('success', 'Data berhasil disimpan');
@@ -191,5 +177,9 @@ class CustomerController extends Controller
 
         // Kirim data ke view 'admin.customers.customer_detail'
         // return view('admin.customers.customer_detail', compact('dataCustomer'));
+    }
+
+    public function update_notice_action($id)
+    {
     }
 }

@@ -17,20 +17,20 @@ class RekapitulasiSeeder extends Seeder
     {
         $rekap = [
             [
-                // "customers_id" => 1,
-                "name" => "ananda maulana wahyudi",
-                "email" => "ananda@gmail.com",
-                "kategori_paket" => "3 Minggu",
-                "nomer_whatsapp" => "08232323232",
+                "customers_id" => 1,
+                // "name" => "ananda maulana wahyudi",
+                // "email" => "ananda@gmail.com",
+                // "kategori_paket" => "3 Minggu",
+                // "nomer_whatsapp" => "08232323232",
                 "tanggal" => date('Y-m-d'),
                 // "pakets_id" => 1
             ],
             [
-                // "customers_id" => 2,
-                "name" => "ananda mw",
-                "email" => "wahyudi@gmail.com",
-                "kategori_paket" => "2 Minggu",
-                "nomer_whatsapp" => "08232323322",
+                "customers_id" => 2,
+                // "name" => "ananda mw",
+                // "email" => "wahyudi@gmail.com",
+                // "kategori_paket" => "2 Minggu",
+                // "nomer_whatsapp" => "08232323322",
                 "tanggal" => date('Y-m-d'),
                 // "pakets_id" => 2
 

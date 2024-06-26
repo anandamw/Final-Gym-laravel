@@ -16,7 +16,7 @@ class Rekapitulasi extends Model
 
     public static function joinTwoTable()
     {
-        $query = DB::table('rekapitulasi_pakets')->join('pakets', 'rekapitulasi_pakets.pakets_id', '=', 'pakets.id')->get();
+        $query = DB::table('rekapitulasi_pakets')->join('customers', 'rekapitulasi_pakets.customers_id', '=', 'customers.id')->get();
         return $query;
     }
 

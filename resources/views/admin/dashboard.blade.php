@@ -12,7 +12,7 @@
                             </div>
                         </div>
                         <div class="flex-grow-1 ms-3">
-                            <h3 class="body-font fw-bold fs-3 mb-2">200</h3>
+                            <h3 class="body-font fw-bold fs-3 mb-2"> {{ $totalPelayanan }}</h3>
                             <span>Total Pelayanan</span>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="flex-grow-1 ms-3">
-                            <h3 class="body-font fw-bold fs-3 mb-2">3.340.000,00</h3>
+                            <h3 class="body-font fw-bold fs-3 mb-2">{{ $totalValue }}</h3>
                             <span>Total Value</span>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                         <div class="flex-grow-1 ms-3">
-                            <h3 class="body-font fw-bold fs-3 mb-2">64</h3>
+                            <h3 class="body-font fw-bold fs-3 mb-2">{{ $totalPelayanan }}</h3>
                             <span>Success Pelayanan</span>
                         </div>
                     </div>
@@ -63,7 +63,9 @@
                             </div>
                         </div>
                         <div class="flex-grow-1 ms-3">
-                            <h3 class="body-font fw-bold fs-3 mb-2">10</h3>
+                            <h3 class="body-font fw-bold fs-3 mb-2">
+                                0
+                            </h3>
                             <span>Pending Pelayanan</span>
                         </div>
                     </div>
@@ -80,7 +82,8 @@
                             </div>
                         </div>
                         <div class="flex-grow-1 ms-3">
-                            <h3 class="body-font fw-bold fs-3 mb-2">4</h3>
+                            <h3 class="body-font fw-bold fs-3 mb-2">
+                                {{ $totalPelayanan }}</h3>
                             <span>Customer</span>
                         </div>
                     </div>

@@ -29,7 +29,7 @@
     @include('sweetalert::alert')
 
 
-    <div class="preloader" id="preloader">
+    {{-- <div class="preloader" id="preloader">
         <div class="preloader">
             <div class="waviy position-relative">
                 <span class="d-inline-block">M</span>
@@ -40,7 +40,7 @@
                 <span class="d-inline-block">M</span>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     @include('admin.layouts.sidebar')
 

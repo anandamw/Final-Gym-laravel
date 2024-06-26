@@ -74,7 +74,8 @@ Route::middleware(['auth'])->group(function () {
             return view('scanner');
         });
 
-        Route::post('/scanner/store', [RekapitulasiPaketController::class, 'store'])->name('store');
+        Route::post('/scanner/store', [RekapitulasiPaketController::class, 'scannerstore'])->name('scannerstore');
+        // Route::get('/qrcode/download/{token}', [RekapitulasiPaketController::class, 'qrdownload'])->name('dowloadqrcode');
     });
 
     Route::middleware(['userAkses:karyawan'])->group(function () {
@@ -89,6 +90,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/customer/create', [CustomerController::class, 'create_action']);
     Route::get('/customer/{id}/update', [CustomerController::class, 'update']);
     Route::post('/customer/{id}/update', [CustomerController::class, 'update_action']);
+    Route::post('/customer/{id}/update/notice', [CustomerController::class, 'update_notice_action']);
     Route::get('/customer/{id}/delete', [CustomerController::class, 'delete']);
 
 
