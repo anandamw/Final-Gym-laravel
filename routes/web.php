@@ -7,6 +7,7 @@ use App\Http\Controllers\PaketController;
 use App\Http\Controllers\RekapitulasiPaketController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\WhatsappController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/pdf', [CustomerController::class, 'index']);
 
 
 Route::middleware(['guest'])->group(function () {
@@ -39,6 +41,8 @@ Route::get('/home', function () {
     return redirect('/dashboard/' . $sesi);
 });
 Route::middleware(['auth'])->group(function () {
+
+
 
     Route::middleware(['userAkses:customer'])->group(function () {
         // page customer
@@ -77,6 +81,8 @@ Route::middleware(['auth'])->group(function () {
         // dashboard karyawan
         Route::get('/dashboard/karyawan', [DashboardController::class, 'karyawan']);
     });
+
+
     // customer
     Route::get('/customer', [CustomerController::class, 'index']);
     Route::get('/customer/create', [CustomerController::class, 'create']);
@@ -84,6 +90,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/customer/{id}/update', [CustomerController::class, 'update']);
     Route::post('/customer/{id}/update', [CustomerController::class, 'update_action']);
     Route::get('/customer/{id}/delete', [CustomerController::class, 'delete']);
+
+
+    Route::get('/customer/{id}/detail', [CustomerController::class, 'details']);
+
 
 
     Route::get('/logout', [SessionController::class, 'logout']);

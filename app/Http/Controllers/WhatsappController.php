@@ -4,16 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Customers;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class WhatsappController extends Controller
 {
 
-
-    public function inject()
+    public function inject($target, $message)
     {
-
-        // $number_customer = Customers::where('nomer_whatsapp')->first();
-
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -26,8 +24,8 @@ class WhatsappController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
-                'target' => '087740505052',
-                'message' => 'test message',
+                'target' => $target,
+                'message' => $message,
                 'countryCode' => '62', //optional
             ),
             CURLOPT_HTTPHEADER => array(

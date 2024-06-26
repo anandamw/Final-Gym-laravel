@@ -24,6 +24,4 @@ class Customers extends Model
         $query = DB::table('customers')->where('token_customer', $token)->first();
         return $query;
     }
-
-   
 }

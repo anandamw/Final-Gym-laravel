@@ -1,5 +1,3 @@
-
-
 <header class="header-area bg-white mb-4 rounded-bottom-10" id="header-area">
     <div class="row align-items-center">
         <div class="col-lg-4 col-sm-6 col-md-4">
@@ -7,8 +5,7 @@
                 <ul
                     class="d-flex align-items-center ps-0 mb-0 list-unstyled justify-content-center justify-content-sm-start">
                     <li>
-                        <button class="header-burger-menu bg-transparent p-0 border-0"
-                            id="header-burger-menu">
+                        <button class="header-burger-menu bg-transparent p-0 border-0" id="header-burger-menu">
                             <i data-feather="menu"></i>
                         </button>
                     </li>
@@ -30,17 +27,17 @@
                     class="d-flex align-items-center justify-content-center justify-content-sm-end ps-0 mb-0 list-unstyled">
                     <li class="header-right-item">
                         <div class="dropdown notifications language">
-                            <button class="btn btn-secondary border-0 p-0 position-relative"
-                                type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ asset("") }}assets/images/united-states.jpg" class="rounded-circle wh-22"
-                                    alt="united-states">
+                            <button class="btn btn-secondary border-0 p-0 position-relative" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset('') }}assets/images/united-states.jpg"
+                                    class="rounded-circle wh-22" alt="united-states">
                             </button>
                             <div class="dropdown-menu dropdown-lg p-0 border-0 p-4">
                                 <div class="notification-menu">
                                     <a href="notification.html" class="dropdown-item p-0">
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0">
-                                                <img src="{{ asset("") }}assets/images/united-states.jpg"
+                                                <img src="{{ asset('') }}assets/images/united-states.jpg"
                                                     class="wh-22 rounded-circle" alt="united-states">
                                             </div>
                                             <div class="flex-grow-1 ms-3">
@@ -55,8 +52,8 @@
                     </li>
                     <li class="header-right-item">
                         <div class="dropdown notifications email">
-                            <button class="btn btn-secondary border-0 p-0 position-relative"
-                                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-secondary border-0 p-0 position-relative" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <i data-feather="mail"></i>
                             </button>
                             <div class="dropdown-menu dropdown-lg p-0 border-0 p-4">
@@ -69,7 +66,7 @@
                                     <a href="notification.html" class="dropdown-item p-0">
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0">
-                                                <img src="{{ asset("") }}assets/images/pdf.svg" alt="pdf">
+                                                <img src="{{ asset('') }}assets/images/pdf.svg" alt="pdf">
                                             </div>
                                             <div class="flex-grow-1 ms-3">
                                                 <h4>Help/Support Desk</h4>
@@ -82,7 +79,7 @@
                                     <a href="notification.html" class="dropdown-item p-0">
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0">
-                                                <img src="{{ asset("") }}assets/images/notifications-1.jpg"
+                                                <img src="{{ asset('') }}assets/images/notifications-1.jpg"
                                                     alt="notifications">
                                             </div>
                                             <div class="flex-grow-1 ms-3">
@@ -96,7 +93,7 @@
                                     <a href="notification.html" class="dropdown-item p-0">
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0">
-                                                <img src="{{ asset("") }}assets/images/notifications-2.jpg"
+                                                <img src="{{ asset('') }}assets/images/notifications-2.jpg"
                                                     alt="notifications">
                                             </div>
                                             <div class="flex-grow-1 ms-3">
@@ -116,8 +113,8 @@
                     </li>
                     <li class="header-right-item">
                         <div class="dropdown notifications noti">
-                            <button class="btn btn-secondary border-0 p-0 position-relative badge"
-                                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-secondary border-0 p-0 position-relative badge" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <i data-feather="bell"></i>
                             </button>
                             <div class="dropdown-menu dropdown-lg p-0 border-0 p-4">
@@ -131,7 +128,7 @@
                                         <h4>8 Invoices have been paid</h4>
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0">
-                                                <img src="{{ asset("") }}assets/images/pdf.svg" alt="pdf">
+                                                <img src="{{ asset('') }}assets/images/pdf.svg" alt="pdf">
                                             </div>
                                             <div class="flex-grow-1 ms-3">
                                                 <p>Invoices have been paid to the company.</p>
@@ -145,7 +142,7 @@
                                         <h4>Create a new project for client</h4>
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0">
-                                                <img src="{{ asset("") }}assets/images/notifications-1.jpg"
+                                                <img src="{{ asset('') }}assets/images/notifications-1.jpg"
                                                     alt="notifications">
                                             </div>
                                             <div class="flex-grow-1 ms-3">
@@ -174,7 +171,7 @@
                             <div class="d-xxl-flex align-items-center bg-transparent border-0 text-start p-0 cursor"
                                 data-bs-toggle="dropdown">
                                 <div class="flex-shrink-0">
-                                    <img class="rounded-circle wh-54" src="{{ asset("") }}assets/images/admin.jpg"
+                                    <img class="rounded-circle wh-54" src="{{ asset('') }}assets/images/admin.jpg"
                                         alt="admin">
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -193,22 +190,19 @@
                             </div>
                             <ul class="dropdown-menu border-0 bg-white w-100 admin-link">
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center text-body"
-                                        href="profile.html">
+                                    <a class="dropdown-item d-flex align-items-center text-body" href="profile.html">
                                         <i data-feather="user"></i>
                                         <span class="ms-2">Profile</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center text-body"
-                                        href="account.html">
+                                    <a class="dropdown-item d-flex align-items-center text-body" href="account.html">
                                         <i data-feather="settings"></i>
                                         <span class="ms-2">Setting</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center text-body"
-                                        href="/logout">
+                                    <a class="dropdown-item d-flex align-items-center text-body" href="/logout">
                                         <i data-feather="log-out"></i>
                                         <span class="ms-2">Logout</span>
                                     </a>

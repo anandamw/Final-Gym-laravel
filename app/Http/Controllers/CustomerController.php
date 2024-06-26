@@ -4,13 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Paket;
 use App\Models\Customers;
+use App\Mail\CustomerMail;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\View\ViewFinderInterface;
 use RealRashid\SweetAlert\Facades\Alert;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Http\Controllers\WhatsappController;
 
 class CustomerController extends Controller
 {
+
+    protected $WhatsappControllers;
+    public function __construct(WhatsappController $WhatsappControllers)
+    {
+        $this->WhatsappControllers = $WhatsappControllers;
+    }
+
     public function index()
     {
 
@@ -27,6 +38,8 @@ class CustomerController extends Controller
 
         return view('admin.customers.customer', compact('dataCustomer'));
     }
+
+
 
     public function create()
     {
@@ -68,7 +81,32 @@ class CustomerController extends Controller
             'status' => $request->status,
         ];
 
-        Customers::create($data);
+        $constCustomer = Customers::create($data);
+
+        $paket = Paket::find($request->pakets_id);
+
+        $target = $constCustomer->nomer_whatsapp;
+
+        // $token = Customers::where('token_customer');
+        $massage = "Haii $request->name, Selamat Datang Di MAXGYM, kamu telah terdaftar di Aplikasi Kami. 
+        
+        Waktu Dibuat : " .  date("Y-m-d h:i:sa ") . "
+        Nama : $request->name
+        Paket : $paket->kategori_paket  
+        Harga : $paket->harga_paket
+        Link QrCode :  $token
+              ";
+
+        $this->WhatsappControllers->inject($target, $massage);
+
+        // $emailData = [
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'nomer_whatsapp' => $request->nomer_whatsapp,
+        //     'kategori_paket' => $paket->kategori_paket,
+        // ];
+        // Mail::to("anandamaulanaw1850@gmail.com")->send(new CustomerMail());
+
         Alert::success('Success Title', 'Success Message');
 
         return redirect('/customer')->with('success', 'Data berhasil disimpan');
@@ -129,5 +167,29 @@ class CustomerController extends Controller
     {
         Customers::where('token_customer', $id)->delete();
         return redirect('/customer');
+    }
+
+
+    public function details($id)
+    {
+        $dataCustomer = Customers::select('customers.*', 'pakets.kategori_paket')
+            ->join('pakets', 'customers.pakets_id', '=', 'pakets.id')
+            ->where('customers.id', $id)
+            ->firstOrFail();
+        // Menambahkan QR Code untuk customer
+        $dataCustomer->qrCode = QrCode::size(150)->generate(json_encode([
+            'name' => $dataCustomer->name,
+            'nomer_whatsapp' => $dataCustomer->nomer_whatsapp,
+            'email' => $dataCustomer->email,
+            'kategori_paket' => $dataCustomer->kategori_paket,
+        ]));
+
+        $mpdf = new \Mpdf\Mpdf();
+        $mpdf->WriteHTML(view('admin.customers.customer_detail', compact('dataCustomer')));
+        $mpdf->Output();
+
+
+        // Kirim data ke view 'admin.customers.customer_detail'
+        // return view('admin.customers.customer_detail', compact('dataCustomer'));
     }
 }
