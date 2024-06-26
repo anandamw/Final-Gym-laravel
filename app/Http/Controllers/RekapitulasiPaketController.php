@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rekapitulasi;
-use Illuminate\Http\Request;
-// use BaconQrCode\Encoder\QrCode;
-use App\Http\Controllers\Controller;
 use App\Models\Customers;
+use App\Models\Rekapitulasi;
+// use BaconQrCode\Encoder\QrCode;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -19,8 +20,6 @@ class RekapitulasiPaketController extends Controller
 
         return view('admin.rekapitulasi-pakets.rekapitulasi-paket', compact('dataRekap'));
     }
-
-
 
 
     public function scannerStore(Request $request)
@@ -37,12 +36,16 @@ class RekapitulasiPaketController extends Controller
             $existingRecord = Rekapitulasi::where('customers_id', $customer->id)
                 ->whereDate('tanggal', now()->toDateString())
                 ->first();
+
             toast('Customer Telah direcord', 'warning');
 
 
             if (!$existingRecord) {
                 // Tambahkan data rekapitulasi paket jika belum ada
+                $token = uniqid(30);
+
                 Rekapitulasi::create([
+                    'token_rekap' => $token,
                     'customers_id' => $customer->id,
                     'tanggal' => now(),
                 ]);
@@ -62,17 +65,16 @@ class RekapitulasiPaketController extends Controller
 
 
 
-    public function scann()
+
+    public function delete($id)
     {
+        Rekapitulasi::where('rekapitulasi_id', $id)->delete();
+        return redirect('/rekapitulasi-paket');
     }
 
 
     public function update()
     {
-
-
-
-
         return view('admin.rekapitulasi-pakets.rekapitulasi-paket_update');
     }
 }

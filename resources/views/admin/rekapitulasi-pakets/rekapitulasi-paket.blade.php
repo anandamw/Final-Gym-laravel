@@ -54,7 +54,6 @@
                             </div>
                         </div>
 
-                        <a href="/rekapitulasi/tambah" class="btn btn-success text-white ">Tambah Rekapitulasi</a>
                     </div>
 
                     <div class="tab-content" id="myTabContent">
@@ -105,7 +104,7 @@
 
                                                                 <li>
                                                                     <a class="dropdown-item"
-                                                                        href="/rekapitulasi-paket/{{ $get->id }}/update">
+                                                                        href="/rekapitulasi-paket/{{ $get->rekapitulasi_id }}/update">
                                                                         <i data-feather="edit-3"></i>
                                                                         Edit
                                                                     </a>
@@ -117,7 +116,8 @@
                                                                     </a>
                                                                 </li>
                                                                 <li>
-                                                                    <a class="dropdown-item" href="javascript:;">
+                                                                    <a class="dropdown-item" data-bs-toggle="modal"
+                                                                        data-bs-target="#exampleModal4{{ $get->rekapitulasi_id }}">
                                                                         <i data-feather="trash-2"></i>
                                                                         Hapus
                                                                     </a>
@@ -126,6 +126,30 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal4{{ $get->rekapitulasi_id }}"
+                                                    tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal
+                                                                    title</h1>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Hello Modal Center
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger text-white"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                                <a href="/rekapitulasi-paket/{{ $get->rekapitulasi_id }}/delete"
+                                                                    type="button"
+                                                                    class="btn btn-primary text-white">Hapus</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             @endforeach
                                         </tbody>
                                     </table>

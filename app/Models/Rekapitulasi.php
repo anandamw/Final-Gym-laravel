@@ -14,6 +14,13 @@ class Rekapitulasi extends Model
 
 
 
+    public static function getToken($token)
+    {
+
+        $query = db::table('rekapitulasi_pakets')->where('token_rekap', $token);
+        return $query;
+    }
+
     public static function joinTwoTable()
     {
         $query = DB::table('rekapitulasi_pakets')->join('customers', 'rekapitulasi_pakets.customers_id', '=', 'customers.id')->get();

@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('rekapitulasi_pakets', function (Blueprint $table) {
-            $table->id();
+            $table->id("rekapitulasi_id")->autoIncrement();
+
+            $table->string('token_rekap');
             $table->foreignId('customers_id')->constrained();
             $table->date('tanggal')->now();
             $table->timestamps();
-
-            // $table->unique(['customers_id', 'tanggal']);
         });
     }
 

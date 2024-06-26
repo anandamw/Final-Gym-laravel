@@ -21,7 +21,7 @@ class Customers extends Model
 
     public static function TokenCustomer__($token)
     {
-        $query = DB::table('customers')->where('token_customer', $token)->first();
+        $query = DB::table('customers')->where('token_customer', $token);
         return $query;
     }
 }

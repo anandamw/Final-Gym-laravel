@@ -18,7 +18,7 @@ class RekapitulasiSeeder extends Seeder
         $rekap = [
             [
                 "customers_id" => 1,
-                // "name" => "ananda maulana wahyudi",
+                "token_rekap" => uniqid(20),
                 // "email" => "ananda@gmail.com",
                 // "kategori_paket" => "3 Minggu",
                 // "nomer_whatsapp" => "08232323232",
@@ -27,7 +27,7 @@ class RekapitulasiSeeder extends Seeder
             ],
             [
                 "customers_id" => 2,
-                // "name" => "ananda mw",
+                "token_rekap" => uniqid(20),
                 // "email" => "wahyudi@gmail.com",
                 // "kategori_paket" => "2 Minggu",
                 // "nomer_whatsapp" => "08232323322",
