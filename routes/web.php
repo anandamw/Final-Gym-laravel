@@ -47,6 +47,8 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['userAkses:customer'])->group(function () {
         // page customer
         Route::get('/page', [UsersController::class, 'customer']);
+        Route::get('/daftar/member', [UsersController::class, 'daftarMember']);
+        Route::post('/daftar/member', [UsersController::class, 'store_action']);
     });
     Route::middleware(['userAkses:admin'])->group(function () {
         // dashboard admin
@@ -73,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('scanner', function () {
             return view('scanner');
         });
+        Route::post('/customer/{id}/scannerstore', [RekapitulasiPaketController::class, 'submitRekap'])->name('scannerstore');
 
         Route::post('/scanner/store', [RekapitulasiPaketController::class, 'scannerstore'])->name('scannerstore');
         // Route::get('/qrcode/download/{token}', [RekapitulasiPaketController::class, 'qrdownload'])->name('dowloadqrcode');

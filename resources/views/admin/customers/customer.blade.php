@@ -36,7 +36,7 @@
                                                    <th scope="col">Nama</th>
                                                    <th scope="col">Nomer WhatsApp</th>
                                                    <th scope="col">Email</th>
-                                                   <th scope="col">Paket</th>
+                                                   {{-- <th scope="col">Paket</th> --}}
                                                    <th scope="col">Status</th>
                                                    <th scope="col">Date</th>
                                                    <th scope="col">Actions</th>
@@ -65,21 +65,21 @@
                                                        <td>
                                                            <span>{{ $get->email }}</span>
                                                        </td>
-                                                       <td>
+                                                       {{-- <td>
                                                            <span>{{ $get->pakets_id }}</span>
-                                                       </td>
+                                                       </td> --}}
                                                        <td>
                                                            <span>
                                                                @if ($get->status == 'pending')
                                                                    <div class="btn btn-warning text-white"
                                                                        data-bs-toggle="modal"
-                                                                       data-bs-target="#exampleModal4{{ $get->id }}">
+                                                                       data-bs-target="#exampleModa5{{ $get->token_customer }}">
                                                                        Pending </div>
 
                                                                    <!-- Modal -->
                                                                    <div class="modal fade"
-                                                                       id="exampleModal4{{ $get->id }}" tabindex="-1"
-                                                                       aria-labelledby="exampleModalLabel"
+                                                                       id="exampleModa5{{ $get->token_customer }}"
+                                                                       tabindex="-1" aria-labelledby="exampleModalLabel"
                                                                        aria-hidden="true">
                                                                        <div class="modal-dialog modal-dialog-centered">
                                                                            <div class="modal-content">
@@ -93,14 +93,29 @@
                                                                                </div>
                                                                                <div class="modal-body">
                                                                                    {{ $get->name }}
+
+                                                                                   <form method="POST"
+                                                                                       action="/customer/{{ $get->token_customer }}/scannerstore">
+                                                                                       @csrf
+
+                                                                                       <input type="text"
+                                                                                           name="token_customer"
+                                                                                           value="{{ $get->token_customer }}"
+                                                                                           id="token_customer">
+
+
+
+
+
                                                                                </div>
                                                                                <div class="modal-footer">
-                                                                                   <button type="button"
+                                                                                   {{-- <button type="button"
                                                                                        class="btn btn-danger text-white"
-                                                                                       data-bs-dismiss="modal">Close</button>
-                                                                                   <button type="button"
+                                                                                       data-bs-dismiss="modal">Close</button> --}}
+                                                                                   <button type="submit"
                                                                                        class="btn btn-primary text-white">Save
                                                                                        changes</button>
+                                                                                   </form>
                                                                                </div>
                                                                            </div>
                                                                        </div>

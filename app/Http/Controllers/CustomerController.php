@@ -37,7 +37,6 @@ class CustomerController extends Controller
 
     public function create()
     {
-
         $dataCustomer = [
             'datapakets' => Paket::all(),
         ];
@@ -46,6 +45,8 @@ class CustomerController extends Controller
 
     public function create_action(Request $request)
     {
+        // ddd($request->all());
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:customers,email',
@@ -72,7 +73,7 @@ class CustomerController extends Controller
             'email' => $request->email,
             'nomer_whatsapp' => $request->nomer_whatsapp,
             'pakets_id' => $request->pakets_id,
-            'status' => $request->status,
+            'status' =>  $request->status
         ];
 
         $constCustomer = Customers::create($data);
@@ -86,14 +87,16 @@ class CustomerController extends Controller
         
         Waktu Dibuat : " .  date("Y-m-d h:i:sa ") . "
         Nama : $request->name
+        Email : $request->email
         Paket : $paket->kategori_paket  
         Harga : $paket->harga_paket
         Link QrCode :  $token
+
               ";
 
 
         $this->WhatsappControllers->inject($target, $massage);
-        Alert::success('Success Title', 'Success Message');
+        Alert::success('Success', 'Data Berhasil ditambahkan');
 
         return redirect('/customer')->with('success', 'Data berhasil disimpan');
     }
@@ -152,6 +155,8 @@ class CustomerController extends Controller
     public function delete($id)
     {
         Customers::where('token_customer', $id)->delete();
+        Alert::success('Success', 'Data Berhasil dihapus');
+
         return redirect('/customer');
     }
 

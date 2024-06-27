@@ -14,6 +14,15 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class RekapitulasiPaketController extends Controller
 {
+
+    protected $WhatsappControllers;
+    
+    public function __construct(WhatsappController $WhatsappControllers)
+    {
+        $this->WhatsappControllers = $WhatsappControllers;
+    }
+
+
     public function index()
     {
         $dataRekap =  Rekapitulasi::joinTwoTable();
@@ -53,9 +62,55 @@ class RekapitulasiPaketController extends Controller
                 toast('Customer Berhasil direcord', 'success');
             }
 
+
+
             // Update status customer
             $customer->status = 'success';
             $customer->save();
+            // Alert::success('Success', 'Data Berhasil diedit');
+
+            return redirect()->back()->with('success', 'Customer status updated and package recorded successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Customer not found.');
+        }
+    }
+    public function submitRekap(Request $request)
+    {
+
+
+        $token = $request->input('customer');
+
+        // Cari customer berdasarkan token
+        $customer = Customers::where('token_customer', $token)->first();
+
+        if ($customer) {
+            // Cek apakah data sudah ada di rekapitulasi_pakets
+            $existingRecord = Rekapitulasi::where('customers_id', $customer->id)
+                ->whereDate('tanggal', now()->toDateString())
+                ->first();
+
+            toast('Customer Telah direcord', 'warning');
+
+
+            if (!$existingRecord) {
+                // Tambahkan data rekapitulasi paket jika belum ada
+                $token = uniqid(30);
+
+                Rekapitulasi::create([
+                    'token_rekap' => $token,
+                    'customers_id' => $customer->id,
+                    'tanggal' => now(),
+                ]);
+
+                toast('Customer Berhasil direcord', 'success');
+            }
+
+
+
+            // Update status customer
+            $customer->status = 'success';
+            $customer->save();
+            // Alert::success('Success', 'Data Berhasil diedit');
 
             return redirect()->back()->with('success', 'Customer status updated and package recorded successfully.');
         } else {

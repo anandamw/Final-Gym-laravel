@@ -39,7 +39,7 @@
                                     <div class="modal-body text-center">
                                         <video id="preview" width="400px" style="border-radius: 1rem;"></video>
                                     </div>
-
+                                    {{-- scann --}}
                                     <form id="form" action="{{ route('scannerstore') }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="customer" id="customer">
@@ -53,7 +53,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="tab-content" id="myTabContent">

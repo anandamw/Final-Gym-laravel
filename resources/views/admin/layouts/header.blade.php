@@ -29,8 +29,8 @@
                         <div class="dropdown notifications language">
                             <button class="btn btn-secondary border-0 p-0 position-relative" type="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ asset('') }}assets/images/united-states.jpg"
-                                    class="rounded-circle wh-22" alt="united-states">
+                                {{-- <img src="{{ asset('') }}assets/images/united-states.jpg"
+                                    class="rounded-circle wh-22" alt="united-states"> --}}
                             </button>
                             <div class="dropdown-menu dropdown-lg p-0 border-0 p-4">
                                 <div class="notification-menu">

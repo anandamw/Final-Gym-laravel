@@ -64,7 +64,7 @@
                         </div>
                         <div class="flex-grow-1 ms-3">
                             <h3 class="body-font fw-bold fs-3 mb-2">
-                                0
+                                {{ $pendingCount }}
                             </h3>
                             <span>Pending Pelayanan</span>
                         </div>

@@ -12,9 +12,11 @@ class DashboardController extends Controller
 {
     public function admin()
     {
+
         $dataAll = [
             "totalPelayanan" => Customers::count(),
-            "totalValue" => Paket::sum('harga_paket')
+            "totalValue" => Paket::sum('harga_paket'),
+            "pendingCount" => Customers::where('status', 'pending')->count()
 
         ];
 
